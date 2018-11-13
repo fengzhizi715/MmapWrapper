@@ -1,11 +1,9 @@
 package com.safframework.mmap;
 
-import java.io.Serializable;
-
 /**
  * Created by tony on 2018/11/12.
  */
-public interface Operator extends Serializable {
+public interface Operator {
 
     /**
      * write a byte to mmap buffer

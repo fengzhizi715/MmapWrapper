@@ -8,8 +8,7 @@ import java.nio.channels.FileChannel;
 /**
  * Created by tony on 2018/11/12.
  */
-public class Buffer implements Serializable {
-
+public class Buffer {
 
     /**
      * the bucket's file
@@ -24,7 +23,7 @@ public class Buffer implements Serializable {
     /**
      * the buffer's size
      */
-    private Long MmapBufferSize = null;
+    private Long mmapBufferSize = null;
 
     /**
      * the current position
@@ -39,10 +38,9 @@ public class Buffer implements Serializable {
      */
     public Buffer(String file,Long mmapBufferSize) throws Exception {
 
-        this.MmapBufferSize = mmapBufferSize;
+        this.mmapBufferSize = mmapBufferSize;
         this.randomAccessFile = new RandomAccessFile(file,"rw");
-        this.mappedByteBuffer = this.randomAccessFile.getChannel().
-                map(FileChannel.MapMode.READ_WRITE,0,this.MmapBufferSize);
+        this.mappedByteBuffer = this.randomAccessFile.getChannel().map(FileChannel.MapMode.READ_WRITE,0,this.mmapBufferSize);
     }
 
     public RandomAccessFile getRandomAccessFile() {
@@ -62,11 +60,11 @@ public class Buffer implements Serializable {
     }
 
     public Long getMmapBufferSize() {
-        return MmapBufferSize;
+        return mmapBufferSize;
     }
 
     public void setMmapBufferSize(Long mmapBufferSize) {
-        MmapBufferSize = mmapBufferSize;
+        this.mmapBufferSize = mmapBufferSize;
     }
 
     public Long getPosition() {
