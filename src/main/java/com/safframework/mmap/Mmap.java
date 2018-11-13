@@ -41,13 +41,11 @@ public class Mmap implements Operator {
 
     public void close(){
 
-        if (buffer!=null) {
-            try {
-                buffer.getRandomAccessFile().close();
-                buffer.getMappedByteBuffer().clear();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        try {
+            buffer.getRandomAccessFile().close();
+            buffer.getMappedByteBuffer().clear();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -126,8 +124,11 @@ public class Mmap implements Operator {
 
     public void clear() {
 
-        unmap(buffer.getMappedByteBuffer());
-        close();
+        if (buffer!=null) {
+
+            unmap(buffer.getMappedByteBuffer());
+            close();
+        }
     }
 
     /**
@@ -135,9 +136,11 @@ public class Mmap implements Operator {
      * @param mbb
      */
     private void unmap(MappedByteBuffer mbb) {
+
         if (mbb == null) {
             return;
         }
+
         try {
             Class<?> clazz = Class.forName("sun.nio.ch.FileChannelImpl");
             Method m = clazz.getDeclaredMethod("unmap", MappedByteBuffer.class);
