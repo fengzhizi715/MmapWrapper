@@ -18,9 +18,9 @@ public class Mmap implements Operator {
         this.buffer = new Buffer(file,mapSize);
         if( buffer == null ){
             throw new MmapException("get a buffer error");
-        }else{
-            System.out.println("initializer with " + mapSize + " bytes map buffer");
         }
+
+        System.out.println("initializer with " + mapSize + " bytes map buffer");
     }
 
     /**
@@ -32,10 +32,11 @@ public class Mmap implements Operator {
         int response = (int) (this.buffer.getMmapBufferSize() -
                 this.buffer.getMappedByteBuffer().position());
         if( response < byteCount ){
+
             throw new MmapException("out of map buffer size limit");
-        }else{
-            System.out.println("require " + byteCount + " byte(s),response " + response + " bytes");
         }
+
+        System.out.println("require " + byteCount + " byte(s),response " + response + " bytes");
     }
 
     public void close(){
@@ -51,7 +52,7 @@ public class Mmap implements Operator {
     }
 
     /**
-     * get the position of now
+     * get current the position
      * @return
      */
     public int getReaderPosition(){
