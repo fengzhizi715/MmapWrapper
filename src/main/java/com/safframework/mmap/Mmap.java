@@ -13,12 +13,9 @@ public class Mmap implements Operator {
 
     private int position = 0;
 
-    public Mmap(String file,Long mapSize) throws Exception {
+    public Mmap(String file,Long mapSize) {
 
         this.buffer = new Buffer(file,mapSize);
-        if( buffer == null ){
-            throw new MmapException("get a buffer error");
-        }
 
         System.out.println("initializer with " + mapSize + " bytes map buffer");
     }

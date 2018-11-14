@@ -1,5 +1,7 @@
 package com.safframework.mmap;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.io.Serializable;
 import java.nio.MappedByteBuffer;
@@ -36,11 +38,18 @@ public class Buffer {
      * @param mmapBufferSize
      * @param
      */
-    public Buffer(String file,Long mmapBufferSize) throws Exception {
+    public Buffer(String file,Long mmapBufferSize) {
 
-        this.mmapBufferSize = mmapBufferSize;
-        this.randomAccessFile = new RandomAccessFile(file,"rw");
-        this.mappedByteBuffer = this.randomAccessFile.getChannel().map(FileChannel.MapMode.READ_WRITE,0,this.mmapBufferSize);
+        try {
+            this.mmapBufferSize = mmapBufferSize;
+            this.randomAccessFile = new RandomAccessFile(file,"rw");
+            this.mappedByteBuffer = this.randomAccessFile.getChannel().map(FileChannel.MapMode.READ_WRITE,0,this.mmapBufferSize);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public RandomAccessFile getRandomAccessFile() {
