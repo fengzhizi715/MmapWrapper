@@ -3,7 +3,6 @@ package com.safframework.mmap;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.io.Serializable;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 
